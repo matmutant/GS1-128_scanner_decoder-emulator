@@ -1,5 +1,5 @@
-#simple PS script that emulates a barcode/datamatrix scanner sending GS1-128 code to a parser.
-#Mathieu GRIVOIS, 20261023 v1.0
+#simple PS script that reads GS1-128 code coming from a datamatrix scanner to display individual keys, including control chars that are not printable.
+#Mathieu GRIVOIS, 20261023 v1.1
 
 Add-Type -AssemblyName System.Windows.Forms
 
