@@ -1,6 +1,6 @@
 #PS script that reads GS1-128 code coming from a datamatrix scanner to display individual keys, including control chars that are not printable.
 #second stage feature is meant to parse and display content of the incoming data
-#Mathieu GRIVOIS, 20261028 v2.0
+#Mathieu GRIVOIS, 20261104 v2.1
 
 Add-Type -AssemblyName System.Windows.Forms
 
@@ -425,7 +425,17 @@ for($i=0; $i -lt [Math]::Min(10,$buffer.Length); $i++) {
             Write-Host "====================================================="
 
             if ($parsed.Fields.PSObject.Properties.Count -gt 0) {
-                $parsed.Fields | Format-List
+
+                $display = [ordered]@{
+                    Symbology = $aimInfo.Symbology + " (" + $aiminfo.AIMID + ")"
+                }
+
+                $parsed.Fields.PSObject.Properties | ForEach-Object {
+                    $display[$_.Name] = $_.Value
+                }
+
+                [PSCustomObject]$display | Format-List
+
             }
             else {
                 Write-Host "Aucune donnée GS1 reconnue."
@@ -440,7 +450,7 @@ for($i=0; $i -lt [Math]::Min(10,$buffer.Length); $i++) {
             Write-Host "====================================================="
 
             if ($parsed.AIList.Count -gt 0) {
-
+                "{0,-4} {1,-18} {2}" -f "--", "Symbology", $aiminfo.Symbology + " (" + $aiminfo.AIMID + ")"
                 foreach ($ai in $parsed.AIList) {
                     "{0,-4} {1,-18} {2}" -f $ai.AI, $ai.Name, $ai.Value
                 }
