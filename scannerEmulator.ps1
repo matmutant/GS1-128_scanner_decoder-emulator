@@ -1,5 +1,5 @@
 #simple PS script that emulates a barcode/datamatrix scanner sending GS1-128 code to a parser.
-#Mathieu GRIVOIS, 20261023 v2.0
+#Mathieu GRIVOIS, 20261104 v2.1
 
 param(
 
@@ -7,17 +7,17 @@ param(
     [int]$Order = 1,
 
     # AIM-ID optionnel
-    [string]$AIMID = "]d2",
+    [string]$AIMID = "",
 
     # AI fixes
-    [string]$GTIN = "18437006085042",      # AI 01
-    [string]$Expiry = "271231",            # AI 17
-    [string]$ProductionDate = "",          # AI 11
-    [string]$BestBefore = "",              # AI 15
+    [string]$GTIN = "",                    # AI 01  ex: 05413206003815 (14 char)
+    [string]$Expiry = "",                  # AI 17  ex: 300430 (YYMMDD)
+    [string]$ProductionDate = "",          # AI 11  ex: 270430 (YYMMDD)
+    [string]$BestBefore = "",              # AI 15  ex: 270130 (YYMMDD)
 
     # AI variables
-    [string]$Lot = "LOT123456",            # AI 10
-    [string]$Serial = "SER987654321",      # AI 21
+    [string]$Lot = "",                     # AI 10  ex: LOT3456789GHJ (variable)
+    [string]$Serial = "",                  # AI 21  ex: SER8765FJ (variable)
     [string]$AdditionalID = "",            # AI 240
     [string]$CustomerPart = "",            # AI 241
 
